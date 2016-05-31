@@ -37,3 +37,7 @@ td:hover {
         transform: scale(0);
     }
 }
+
+.dobavitStolbec, .delete {
+    display:none;
+}

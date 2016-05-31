@@ -1,196 +1,27 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
 	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 
-<body>
+<body ng-app="testingApp">
 
-<script>
-function randomInteger(min, max) {
-    var rand = min - 0.5 + Math.random() * (max - min + 1)
-    rand = Math.round(rand);
-    return rand;
-  }
+<div>
+	<a href="#/">Главная</a>
+	<a href="#/animation">Анимация</a>
+</div>
 
-var rc = function () {
-	//console.log(randomInteger(100000, 999999));
+<div ng-view></div>
 
-	var c = '#';
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-	var slo = '';
-	for (var i=0; i<6; i++) {
-		slo = randomInteger(0, 15);
-		if (slo == 10) {
-			slo = 'a';
-		}
-		else if (slo == 11 ) {
-			slo = 'b';
-		}
-		else if (slo == 12 ) {
-			slo = 'b';
-		}
-		else if (slo == 13 ) {
-			slo = 'c';
-		}
-		else if (slo == 14 ) {
-			slo = 'e';
-		}
-		else if (slo == 15 ) {
-			slo = 'f';
-		}
+<!-- Vendor: Angular.js -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
 
-		c = c + slo;
-	}
-
-	return c;
-}
-
-//console.log (rc());
-</script>
-
-<button class="dobavit">Добавить</button>
-<button style="display:none;" class="dobavitStolbec">Добавить столбец</button>
-<button style="display:none;" class="delete">Удалить</button>
-<script>
-
-
-
-$('.dobavit').click(function() {
-	var table1 = $('table');
-
-	var uzeEst = $('tr');
-	var skolko_budet_TD = 1;
-	if (uzeEst[0]) {
-		skolko_budet_TD = uzeEst[0].children.length;
-	}
-	
-	var body = $('body');
-	
-	if (table1.length>0) {
-		var table = $(table1[0]);
-	}
-	else {
-		var table = $('<table></table>');
-		body.append(table);
-	}
-
-	$('.dobavitStolbec').show();
-	$('.delete').show();
-
-	var strocaTable = $('<tr></tr>');
-	var yacekaTable = '';
-		
-	for (var i=1; i<=skolko_budet_TD; i++) {
-		yacekaTable = $('<td style="background-color:' + rc()+'"></td>');
-		strocaTable.append(yacekaTable.clone());
-	}
-
-	table.append(strocaTable);
-
-	saveCookie();
-
-
-});
-
-$('.dobavitStolbec').click(function() {
-	var stolbec = $('<td style="background-color:' + rc()+'"></td>');
-
-	var vseTR = $('tr');
-	//console.log(vseTR);
-	var skolko_budet_TD = vseTR.length;
-
-
-
-	for (var i=0; i<skolko_budet_TD; i++) {
-		stolbec= $('<td style="background-color:' + rc()+'"></td>');
-		$(vseTR[i]).append(stolbec.clone());
-	}
-
-	saveCookie();
-});
-
-$('.delete').click (function () {
-	$('tr').remove();
-
-	$('.dobavitStolbec').hide();
-	$('.delete').hide();
-
-	saveCookie();
-});
-
-function saveCookie () {
-	var trForCookie = $('tr');
-	var countTrForCookie = trForCookie.length;
-
-	if (trForCookie[0]) {
-		var tdforCookie = trForCookie[0].children.length;
-	}
-	else {
-		var tdforCookie = 0;
-	}
-
-	$.cookie('countTR', countTrForCookie, {expires: 7 });
-	$.cookie('countTD',tdforCookie, {expires: 7});
-}
-
-
-
-var countTR = $.cookie('countTR');
-var countTD = $.cookie('countTD');
-if (countTR > 0) {
-	//console.log (countTR, countTD);
-	var stroca = $('<tr></tr>');
-	var stolbec = $('<td style="background-color:' + rc()+'"></td>>');
-	var table1 = $('<table></table>');
-	var body1 = $('body');
-	body1.append(table1);
-
-	for (var i=0; i<countTR; i++){
-		stroca = $('<tr></tr>');
-		table1.append(stroca);
-		for (var j=0; j<countTD; j++) {
-			stolbec=$('<td style="background-color:' + rc()+'"></td>>');
-			stroca.append(stolbec);
-		}
-	}
-	$('.dobavitStolbec').show();
-	$('.delete').show();
-
-}
-
-
-
-var leader = {
-	name: "Василий Иванович"
-
-};
-
-var soldier = {
-	name: "Петька"
-};
-
-// эти объекты ссылаются друг на друга!
-leader.soldier = soldier;
-soldier.leader = leader;
-
-var team = [leader, soldier];
-
-console.log();
-
-$.ajax({
-	url: "config.json",
-	dataType : "json",
-	success: function (dump) {
-		//console.log (dump);
-		//console.log (dump.countTR);
-	}
-});
-
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
