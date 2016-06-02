@@ -41,3 +41,117 @@ td:hover {
 .dobavitStolbec, .delete {
     display:none;
 }
+
+.kvadrat {
+    text-align: center;
+    height: 80px;
+    width: 60px;
+    background: #2db34a;
+    transition-property: background, border-radius;
+    transition-duration: 5s;
+    transition-timing-function: linear;
+}
+
+.kvadrat:hover {
+
+    -webkit-transform: scale(9);
+    transform: scale(9);
+}
+
+.card-container {
+    cursor: pointer;
+    height: 256px;
+    perspective: 600;
+    position: relative;
+    width: 256px;
+}
+.card {
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: all 1s ease-in-out;
+    width: 100%;
+}
+.card:hover {
+    transform: rotateY(180deg);
+}
+.card .side {
+    backface-visibility: hidden;
+
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+}
+.card .back {
+    backface-visibility: hidden;
+
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+
+
+    transform: rotateY(180deg);
+}
+
+@keyframes slide {
+    0% {
+        left: 0;
+        top: 0;
+    }
+    20% {
+        left: 80px;
+        top: 100px;
+        transform: rotateY(30deg);
+    }
+    30% {
+          left: 160px;
+          top: 50px;
+      }
+    40% {
+        left: 240px;
+        top: 144px;
+        transform: rotateY(20deg);
+    }
+    50% {
+        left: 320px;
+        top: 0;
+    }
+    60% {
+        left: 400px;
+        top: 90px;
+        transform: rotateY(40deg);
+    }
+    50% {
+        left: 480px;
+        top: 150px;
+    }
+    50% {
+        left:560px;
+        top: 50px;
+    }
+    80% {
+        left: 600px;
+        top: 100px;
+    }
+    100% {
+        left: 640px;
+        top: 0;
+    }
+}
+.stage {
+    background: #eaeaed;
+    border-radius: 6px;
+    height: 250px;
+    position: relative;
+    min-width: 538px;
+}
+.stage:hover .pero {
+    animation: slide 4s linear;
+}
+.pero {
+    height: 10px;
+    position: absolute;
+
+}
